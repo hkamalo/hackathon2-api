@@ -30,7 +30,8 @@ model Job {
 }
 
 model Skill {
-    id   Int    @id @default(autoincrement())
-    name String @unique @db.VarChar(255)
-    jobs Job[]
+    id    Int    @id @default(autoincrement())
+    name  String @unique @db.VarChar(255)
+    Job   Job?   @relation(fields: [jobId], references: [id])
+    jobId Int?
 }
