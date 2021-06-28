@@ -12,8 +12,11 @@ model User {
     email     String    @unique @db.VarChar(255)
     firstname String    @db.VarChar(255)
     lastname  String    @db.VarChar(255)
+    avatarUrl String    @db.VarChar(255)
     jobs      Job[]
     projects  Project[]
+    Role      Role?     @relation(fields: [roleId], references: [id])
+    roleId    Int?
 }
 
 model Project {
@@ -34,4 +37,10 @@ model Skill {
     name  String @unique @db.VarChar(255)
     Job   Job?   @relation(fields: [jobId], references: [id])
     jobId Int?
+}
+
+model Role {
+    id    Int    @id @default(autoincrement())
+    name  String @unique @db.VarChar(255)
+    users User[]
 }

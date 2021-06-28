@@ -1,32 +1,58 @@
 const db = require('../db');
 
 module.exports = async function seed() {
+  await db.role.createMany({
+    data: [{ name: 'Product Owner' }, { name: 'Worker' }],
+  });
   await db.user.createMany({
     data: [
       {
         email: 'brandon.monge@outlook.fr',
         firstname: 'Brandon',
         lastname: 'Monge',
+        avatarUrl:
+          'https://media-exp1.licdn.com/dms/image/C4E03AQEiSS-qlGWWBg/profile-displayphoto-shrink_800_800/0/1621526642330?e=1630540800&v=beta&t=zZD9KJhych4JyOo_R56WjgTGQ0O-wJwzpfE91Nq4orQ',
+        roleId: 2,
       },
       {
         email: 'berdalado@gmail.com',
         firstname: 'Doriane',
         lastname: 'Berdala',
+        avatarUrl:
+          'https://media-exp1.licdn.com/dms/image/D4E35AQGy6lzwNq6KGQ/profile-framedphoto-shrink_800_800/0/1621518664362?e=1624978800&v=beta&t=U74-v1nfy6plwnuMM4voTVnTWkjpqK0RAhi1xBXacuM',
+        roleId: 2,
       },
       {
         email: 'solene.gerard@gmail.com',
         firstname: 'Solène',
         lastname: 'Gerard',
+        avatarUrl:
+          'https://media-exp1.licdn.com/dms/image/D4D35AQHuh-7n-xo3Cg/profile-framedphoto-shrink_800_800/0/1622061231871?e=1624978800&v=beta&t=7GSWhErbf4lyBVWmT55lGkAfqAWcEikVZc-0WMuzQHo',
+        roleId: 2,
       },
       {
         email: 'florian.jaimond@gmail.com',
         firstname: 'Florian',
         lastname: 'Jaimond',
+        avatarUrl:
+          'https://media-exp1.licdn.com/dms/image/D4D35AQGnORW96ketXQ/profile-framedphoto-shrink_800_800/0/1622759171119?e=1624978800&v=beta&t=4w6ZOw_H5uhLmt4a4maoYXFmOekL2jrtLizEqG55i8o',
+        roleId: 2,
       },
       {
         email: 'contact.pro@hkamalo.com',
         firstname: 'Herança',
         lastname: 'Kamalo',
+        avatarUrl:
+          'https://media-exp1.licdn.com/dms/image/C5603AQFFMK0Xzx-knQ/profile-displayphoto-shrink_800_800/0/1622061615539?e=1630540800&v=beta&t=mHnccCAQ8rE8zpiLqI7UHYxdfXYK0DAXv5nOW3vhAck',
+        roleId: 2,
+      },
+      {
+        email: 'fiverr@contact.com',
+        firstname: 'Fiverr',
+        lastname: 'Pro',
+        avatarUrl:
+          'https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/09/fiverr-2018.png?auto=format&q=60&fit=max&w=930',
+        roleId: 1,
       },
     ],
   });
