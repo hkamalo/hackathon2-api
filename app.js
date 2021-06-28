@@ -1,29 +1,33 @@
 const express = require('express');
 const cors = require('cors');
-
-require('dotenv').config();
-
-
-
-const port = process.env.PORT || 5000;
+const { PORT, inTestEnv, CORS_ALLOWED_ORIGINS } = require('./env');
 
 const app = express();
 
+app.set('x-powered-by', false);
+app.set('trust proxy', 1);
 app.use(express.json());
-app.set('x-powered-by', false); // for security
-app.set('trust proxy', 1); // trust first proxy
 
+const allowedOrigins = CORS_ALLOWED_ORIGINS.split(',');
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (origin === undefined || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 
-
-
-
-const server = app.listen(port, () => {
-  if (!inTestEnv) console.log(`Server is running on port: ${port}`);
+const server = app.listen(PORT, () => {
+  if (!inTestEnv) {
+    console.log(`Server running on port ${PORT}`);
+  }
 });
 
-// process setup : improves error reporting
 process.on('unhandledRejection', (error) => {
   console.error('unhandledRejection', JSON.stringify(error), error.stack);
 });
