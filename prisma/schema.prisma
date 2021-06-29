@@ -13,30 +13,26 @@ model User {
     firstname String    @db.VarChar(255)
     lastname  String    @db.VarChar(255)
     avatarUrl String    @db.VarChar(255)
-    jobs      Job[]
     projects  Project[]
+    tags      Tag[]
     Role      Role?     @relation(fields: [roleId], references: [id])
     roleId    Int?
 }
 
 model Project {
-    id    Int    @id @default(autoincrement())
-    name  String @db.VarChar(255)
-    users User[]
+    id       Int      @id @default(autoincrement())
+    name     String   @db.VarChar(255)
+    deadline DateTime @default(now())
+    budget   String   @db.VarChar(255)
+    tags     Tag[]
+    users    User[]
 }
 
-model Job {
-    id     Int     @id @default(autoincrement())
-    name   String  @unique @db.VarChar(255)
-    skills Skill[]
-    users  User[]
-}
-
-model Skill {
-    id    Int    @id @default(autoincrement())
-    name  String @unique @db.VarChar(255)
-    Job   Job?   @relation(fields: [jobId], references: [id])
-    jobId Int?
+model Tag {
+    id       Int       @id @default(autoincrement())
+    name     String    @unique @db.VarChar(255)
+    projects Project[]
+    users    User[]
 }
 
 model Role {

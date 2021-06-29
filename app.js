@@ -22,6 +22,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+require('./routes')(app);
+
 const server = app.listen(PORT, () => {
   if (!inTestEnv) {
     console.log(`Server running on port ${PORT}`);
